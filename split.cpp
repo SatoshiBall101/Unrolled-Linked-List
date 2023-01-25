@@ -11,13 +11,60 @@ the function below should be the only one in this file.
 */
 
 #include "split.h"
+#include <cstddef>
 
 /* Add a prototype for a helper function here if you need */
 
 void split(Node*& in, Node*& odds, Node*& evens)
 {
-  /* Add code here */
-// WRITE YOUR CODE HERE
+
+  // base case: check to make sure linked list is not empty
+
+  if (in == NULL)
+  {
+    return; // work is done if it is empty
+  }
+
+  // let's check if the value is even
+
+  if (in->value % 2 == 0) // if it is even we will add it to evens list
+  {
+    // lets handle base case: evens list is empty
+    if (evens == NULL)
+    {
+      evens = in; // giving evens LL pointer to node
+      in = in->next; // drop of the node in the original LL
+      evens->next = NULL; // update the evens node's next w/ nullptr
+    }
+    else // if evens is not empty
+    {
+      Node* temp = evens; 
+      evens = in; 
+      in = in->next;
+      evens->next = temp;
+
+    }
+  }
+  else
+  {
+    // lets handle base case: odds list is empty
+    if (odds == NULL)
+    {
+      odds = in; // giving evens LL pointer to node
+      in = in->next; // drop of the node in the original LL
+      odds->next = NULL; // update the evens node's next w/ nullptr
+    }
+    else // if evens is not empty
+    {
+      Node* temp = odds; 
+      odds = in; 
+      in = in->next;
+      odds->next = temp;
+
+    }
+  }
+
+  split(in, odds, evens); //recursive call
 }
 
 /* If you needed a helper function, write it here */
