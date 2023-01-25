@@ -32,27 +32,27 @@ void split(Node*& in, Node*& odds, Node*& evens)
     // lets handle base case: evens list is empty
     if (evens == NULL)
     {
-      evens = in; // giving evens LL pointer to node
+      evens = in; // evens ptr points at even node in OG LL 
       in = in->next; // drop of the node in the original LL
       evens->next = NULL; // update the evens node's next w/ nullptr
     }
     else // if evens is not empty
     {
-      Node* temp = evens; 
-      evens = in; 
-      in = in->next;
-      evens->next = temp;
+      Node* temp = evens; // create temporary ptr to even node
+      evens = in; // evens LL takes even node
+      in = in->next; // drop the even value node from original LL
+      evens->next = temp; // add the even node to the front of evens LL
 
     }
   }
-  else
+  else // if not even, it must be odd
   {
     // lets handle base case: odds list is empty
     if (odds == NULL)
     {
-      odds = in; // giving evens LL pointer to node
+      odds = in; // giving odds LL pointer to node
       in = in->next; // drop of the node in the original LL
-      odds->next = NULL; // update the evens node's next w/ nullptr
+      odds->next = NULL; // update the odd node's next w/ nullptr
     }
     else // if evens is not empty
     {
